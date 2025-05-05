@@ -7,14 +7,16 @@
 
 void display();
 void reshape(int, int);
-void timer(int);
 
 int sceneNumber = 1;
 int totalScene = 11;
-int frame = 0;
 int framePerScene = 165; // 30 * 70 / 11 = 245 frames 
 int frameDuration = 34;  // 1000 / 30 = frame duration (1 second / 30 frame per second)
 
+void anim(int value) {
+	glutPostRedisplay();
+	glutTimerFunc(frameDuration, anim, 0);
+}
 
 int main(int argc, char **argv)
 {
@@ -26,7 +28,7 @@ int main(int argc, char **argv)
 	glutCreateWindow("2D Animation");
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	glutTimerFunc(frameDuration, timer, 0);
+	glutTimerFunc(frameDuration, anim, 0);
 
 	glutMainLoop();
 
@@ -36,27 +38,27 @@ void display()
 {
 	switch (sceneNumber)
 	{
-		case 1: scene1(frame);
+		case 1: sceneNumber += scene1();
 				break;
-		case 2: scene2(frame);
+		case 2: sceneNumber += scene2();
 				break;
-		case 3: scene3(frame);
+		case 3: sceneNumber += scene3();
 				break;
-		case 4: scene4(frame);
+		case 4: sceneNumber += scene4();
 				break;
-		case 5: scene5(frame);
+		case 5: sceneNumber += scene5();
 				break;
-		case 6: scene6(frame);
+		case 6: sceneNumber += scene6();
 				break;
-		case 7: scene7(frame);
+		case 7: sceneNumber += scene7();
 				break;
-		case 8: scene8(frame);
+		case 8: sceneNumber += scene8();
 				break;
-		case 9: scene9(frame);
+		case 9: sceneNumber += scene9();
 				break;
-		case 10: scene10(frame);
+		case 10:sceneNumber += scene10();
 				break;
-		case 11: scene11(frame);
+		case 11:sceneNumber += scene11();
 				break;
 	}
 	
@@ -71,23 +73,5 @@ void reshape(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void timer(int)
-{
-	if (sceneNumber <= totalScene)
-	{
-		frame++;
-		if (frame >= framePerScene)
-		{
-			frame = 0;
-			sceneNumber++;
-			if (sceneNumber > 11)
-			{
-				sceneNumber = 1;
-			}
-		}
-		glutPostRedisplay();
-		glutTimerFunc(frameDuration, timer, 0);
-	}
 
-}
 

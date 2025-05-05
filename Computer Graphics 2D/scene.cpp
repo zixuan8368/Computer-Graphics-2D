@@ -5,7 +5,11 @@
 #include "castle.h"
 #include "character.h"
 
-void scene1(int frame)
+float char1_x = 0;
+float char2_x = 0;
+float dragon_x = 0;
+
+int scene1()
 {
 	glClearColor(0.2, 0.6, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -31,23 +35,32 @@ void scene1(int frame)
 
 	//Drawing character1
 	glPushMatrix();
-	glTranslatef(-15.0 + frame * 0.1, -6.0, 0.0);
+	glTranslatef(-15.0 + char1_x * 0.1, -6.0, 0.0);
 	glScalef(1.25, 1.25, 1.25);
 	drawCharacter1();
 	glPopMatrix();
 
 	//Drawing character2
 	glPushMatrix();
-	glTranslatef(-10.0 + frame * 0.1, -6.0, 0.0);
+	glTranslatef(-10.0 + char2_x * 0.1, -6.0, 0.0);
 	glScalef(1.25, 1.25, 1.25);
 	drawCharacter2();
 	glPopMatrix();
 
 
 	glutSwapBuffers();
+
+	if (char1_x == 100) {
+		return 1;
+	}
+	
+	char1_x += 1;
+	char2_x += 1;
+
+	return 0;
 }
 
-void scene2(int frame)
+int scene2()
 {
 	glClearColor(0.0, 0.0, 0.6, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -75,23 +88,27 @@ void scene2(int frame)
 	
 
 	// Drawing the dragon
-	int verticalP = 7.0 - frame * 0.075;
+	int verticalP = 7.0 - dragon_x * 0.075;
 	if(verticalP < -5.0)
 		verticalP = -5.0;
 	glPushMatrix();
 		glScalef(-1.0, 1.0, 1.0);
-		drawDragon(-13.0 + frame * 0.05, verticalP, 2.5);
+		drawDragon(-13.0 + dragon_x * 0.05, verticalP, 2.5);
 	glPopMatrix();
 
-
+	dragon_x += 1.0f;
 	glutSwapBuffers();
+	if (dragon_x >= 100) {
+		return 1;
+	}
 
+	return 0;
 	
 }
 
-void scene3(int frame)
+int scene3()
 {
-	srand(frame / 30);
+	srand(240);
 	glClearColor(0.678, 1.0, 0.184, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
@@ -127,93 +144,113 @@ void scene3(int frame)
 	drawFlame(rand() % 41 - 20, rand() % 41 - 20, (rand() % 10) + 1.0);
 
 	glPushMatrix();
-	glTranslatef(-5.0 + frame * 0.02, -8.0, 0.0);
+	glTranslatef(-5.0 + char1_x * 0.02, -8.0, 0.0);
 	glScalef(0.5, 0.5, 0.5);
 	drawCharacter1();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(7.0 + frame * 0.01, -4.0, 0.0);
+	glTranslatef(7.0 + char2_x * 0.01, -4.0, 0.0);
 	glScalef(0.5, 0.5, 0.5);
 	drawCharacter2();
 	glPopMatrix();
 
 
 	glutSwapBuffers();
+
+	if (char2_x >= 600) {
+		return 1;
+	}
+	
+	char2_x += 10.0f;
+	char1_x -= 10.0f;
+
+	return 0;
+
 }
 
-void scene4(int frame)
+int scene4()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
-
+	int count = 0;
+	while (count < 10000) {
+		count++;
+	}
 	
 
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene5(int frame)
+int scene5()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene6(int frame)
+int scene6()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene7(int frame)
+int scene7()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene8(int frame)
+int scene8()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene9(int frame)
+int scene9()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene10(int frame)
+int scene10()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
 
 	glutSwapBuffers();
+	return 1;
 }
 
-void scene11(int frame)
+int scene11()
 {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glLoadIdentity();
-
-	glutSwapBuffers();
+	
+	return 1;
 }
 
